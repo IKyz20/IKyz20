@@ -36,22 +36,18 @@ echo -e "$green << setup dirs >> \n $white"
 
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
- 
-# MIUI = High Dimens
-# OSS = Low Dimens
 
 export CHATID API_BOT TYPE_KERNEL
 
 # Kernel build config
-TYPE="[OSS][BQ]"
-KERNEL_NAME="AGHISNA"
-DEVICE="Redmi note 10 pro"
-DEFCONFIG="sweet_defconfig"
-AnyKernel="https://github.com/RooGhz720/Anykernel3"
+TYPE="[AOSP]"
+KERNEL_NAME="IKyz20-Kernel"
+DEVICE="Poco M3/Redmi 9T (Chime/Juice)"
+DEFCONFIG="vendor/chime_defconfig"
+AnyKernel="https://github.com/IKyz20/Anykernel3"
 AnyKernelbranch="master"
 HOSST="MyLabs"
-USEER="aghisna"
-ID="25"
+USEER="MasIKyz"
 MESIN="Git Workflows"
 
 # clang config
@@ -113,19 +109,7 @@ tg_error() {
 build_kernel() {
 Start=$(date +"%s")
 
-	make -j$(nproc --all) O=out \
-                              ARCH=arm64 \
-                              LLVM=1 \
-                              LLVM_IAS=1 \
-                              AR=llvm-ar \
-                              NM=llvm-nm \
-                              LD=ld.lld \
-                              OBJCOPY=llvm-objcopy \
-                              OBJDUMP=llvm-objdump \
-                              STRIP=llvm-strip \
-                              CC=clang \
-                              CROSS_COMPILE=aarch64-linux-gnu- \
-                              CROSS_COMPILE_ARM32=arm-linux-gnueabi-  2>&1 | tee error.log
+    make O=out CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 -j$(nproc)  2>&1 | tee error.log
 
 End=$(date +"%s")
 Diff=$(($End - $Start))
@@ -134,12 +118,9 @@ Diff=$(($End - $Start))
 # Let's start
 echo -e "$green << doing pre-compilation process >> \n $white"
 export ARCH=arm64
-export SUBARCH=arm64
-export HEADER_ARCH=arm64
 
 export KBUILD_BUILD_HOST="$HOSST"
 export KBUILD_BUILD_USER="$USEER"
-export KBUILD_BUILD_VERSION="$ID"
 
 mkdir -p out
 
@@ -155,9 +136,7 @@ KERVER=$(make kernelversion)
 KOMIT=$(git log --pretty=format:'"%h : %s"' -1)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-export IMG="$MY_DIR"/out/arch/arm64/boot/Image.gz-dtb
-export dtbo="$MY_DIR"/out/arch/arm64/boot/dtbo.img
-export dtb="$MY_DIR"/out/arch/arm64/boot/dtb.img
+export IMG="$MY_DIR"/out/arch/arm64/boot/Image
 
         if [ -f "$IMG" ]; then
                 echo -e "$green << selesai dalam $(($Diff / 60)) menit and $(($Diff % 60)) detik >> \n $white"
@@ -183,7 +162,7 @@ TEXT1="
 * System Build* : \`$MESIN\`
 * Date Build* : \`$TGL\` \`$WAKTU\`
 * Last Commit* : \`$KOMIT\`
-* Author* : @RooGhz720
+* Author* : @Z200AZ
 ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
 "
 
@@ -192,10 +171,7 @@ TEXT1="
                 git clone --depth=1 "$AnyKernel" --single-branch -b "$AnyKernelbranch" zip
                 echo -e "$yellow << making kernel zip >> \n $white"
                 cp -r "$IMG" zip/
-                cp -r "$dtbo" zip/
-                cp -r "$dtb" zip/
                 cd zip
-                mv dtbo.img mie-kuah
                 export ZIP="$KERNEL_NAME"-"$TYPE"-"$TGL"
                 zip -r9 "$ZIP" * -x .git README.md LICENSE *placeholder
                 curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
