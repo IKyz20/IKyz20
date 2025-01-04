@@ -51,7 +51,7 @@ USEER="MasIKyz"
 MESIN="Git Workflows"
 
 # clang config
-REMOTE="https://github.com/llvm/llvm-project.git"
+REMOTE="https://github.com"
 TARGET="clementval"
 REPO="llvm-project"
 BRANCH="main"
