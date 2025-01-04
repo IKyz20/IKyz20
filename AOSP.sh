@@ -52,8 +52,8 @@ MESIN="Git Workflows"
 
 # clang config
 REMOTE="https://github.com"
-TARGET="clementval"
-REPO="llvm-project"
+TARGET="dakkshesh07"
+REPO="clang-build-catalogue"
 BRANCH="main"
 
 # setup telegram env
