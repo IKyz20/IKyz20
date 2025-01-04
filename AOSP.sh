@@ -41,7 +41,7 @@ export CHATID API_BOT TYPE_KERNEL
 
 # Kernel build config
 TYPE="[AOSP]"
-KERNEL_NAME="IKyz20-Kernel"
+KERNEL_NAME="IKyz-Kernel"
 DEVICE="Poco M3/Redmi 9T (Chime/Juice)"
 DEFCONFIG="vendor/chime_defconfig"
 AnyKernel="https://github.com/IKyz20/Anykernel3"
@@ -51,10 +51,10 @@ USEER="MasIKyz"
 MESIN="Git Workflows"
 
 # clang config
-REMOTE="https://gitlab.com"
-TARGET="GhostMaster69-dev"
-REPO="cosmic-clang"
-BRANCH="master"
+REMOTE="https://github.com/llvm/llvm-project.git"
+TARGET="clementval"
+REPO="llvm-project"
+BRANCH="main"
 
 # setup telegram env
 export WAKTU=$(date +"%T")
@@ -155,7 +155,7 @@ TEXT1="
 *Build Completed Successfully*
 ━━━━━━━━━ஜ۩۞۩ஜ━━━━━━━━
 * Device* : \`$DEVICE\`
-* Code name* : \`Sweet | Sweetin\`
+* Code name* : \`Chime | Juice\`
 * Variant Build* : \`$TYPE\`
 * Time Build* : \`$(($Diff / 60)) menit\`
 * Branch Build* : \`$BRANCH\`
