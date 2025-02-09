@@ -46,7 +46,7 @@ DEVICE="Poco M3/Redmi 9T (Chime/Juice)"
 DEFCONFIG="vendor/chime_defconfig"
 AnyKernel="https://github.com/IKyz20/Anykernel3"
 AnyKernelbranch="main"
-HOSST="MyLabs"
+HOSST="IKyz@MyLabs"
 USEER="MasIKyz"
 MESIN="Git Workflows"
 
